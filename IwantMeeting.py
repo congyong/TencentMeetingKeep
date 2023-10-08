@@ -89,7 +89,11 @@ def parse_text(text):
 
 def open_meeting(meeting_code, launch_id):
     url = f'wemeet://page/inmeeting?meeting_code={meeting_code}&launch_id={launch_id}&rs=5'
-    webbrowser.open(url)
+    if os.name == 'nt':
+        webbrowser.open(url)
+    else: #ubuntu open url sliently
+        cmd='xdg-open '+url
+        os.system(cmd)
 
 def load_history():
     if os.path.exists("meeting_rec.yaml"):
